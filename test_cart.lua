@@ -422,11 +422,25 @@ function scene:create( event )
 	nama_produk:setFillColor(0)
 	scrollView:insert(nama_produk)
 
-	local button_x = display.newText( "X", background_label.x + background_label.width/2 - 10, background_label.y + 5, used_font_bold, 15  * (display.contentWidth / 320))
+	--[[local button_x = display.newText( "X", background_label.x + background_label.width/2 - 10, background_label.y + 5, used_font_bold, 15  * (display.contentWidth / 320))
 	button_x.anchorX = 1
 	button_x.anchorY = 0
 	button_x:setFillColor(1,0,0)
-	scrollView:insert(button_x)
+	scrollView:insert(button_x)--]]
+
+	local button_x = display.newImageRect( composer.imgDir.. "close.png", 200, 200 ); 
+    button_x.x = background_label.x + background_label.width/2 - 10;
+    button_x.y =  background_label.y + 10
+    button_x.anchorY = 0
+    button_x.anchorX = 1
+    --button_x:scale(0.5,0.5)
+    button_x.xScale = (display.contentWidth* 0.04) / button_x.width 
+    button_x.yScale = (display.contentWidth * 0.04) / button_x.width 
+    button_x:setFillColor(1,0,0)
+    scrollView:insert(button_x)
+
+    
+
 	local function onButtonX()
 
 		local tablesetup = [[DELETE FROM t_produk_cart WHERE t_produk_id=]]..id_cart..[[;]]
@@ -450,6 +464,12 @@ function scene:create( event )
 	qty_produk:setFillColor(0)
 	scrollView:insert(qty_produk)
 
+
+	local total_produk = display.newText( "Total : Rp."..(row.qty * row.price), background_label.x + background_label.width/2 - 10, background_label.y + background_label.height - display.contentHeight/30, used_font, 12  * (display.contentWidth / 320))
+	total_produk.anchorX = 1
+	total_produk.anchorY = 0
+	total_produk:setFillColor(0)
+	scrollView:insert(total_produk)
 
 
  	
@@ -508,7 +528,14 @@ function scene:create( event )
 	scrollView:insert(teks_email)
 
 
-	local footer_background = display.newRect( display.contentCenterX, background_checkout.y + display.contentHeight/6, display.contentWidth, display.contentHeight/7)
+	local tinggi_footer = background_checkout.y + display.contentHeight/6
+	print("tinggi abc : "..display.contentHeight/7)
+	print("tinggi footer : "..tinggi_footer)
+	if(tinggi_footer < display.contentHeight - display.contentHeight/7)then
+		tinggi_footer = display.contentHeight - display.contentHeight/7 - composer.tinggi_header
+	end
+	print("tinggi footer2 : "..tinggi_footer)
+	local footer_background = display.newRect( display.contentCenterX, tinggi_footer, display.contentWidth, display.contentHeight/7)
 	footer_background.anchorY = 0
 	footer_background:setFillColor( 133/255,190/255,72/255)
 	scrollView:insert(footer_background)

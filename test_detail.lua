@@ -700,305 +700,334 @@ function scene:create( event )
 
 			         composer.tinggi_desc = teks_produk_diskon_desc.y + teks_produk_diskon_desc.height
 
-					local pilihan_warna = display.newText( "Warna", 0 + display.contentWidth * 0.05 , composer.tinggi_desc + display.contentHeight/20 , used_font, 11  * (display.contentWidth / 320))
-					pilihan_warna.anchorX = 0
-					pilihan_warna:setFillColor( 0 )
-					scrollView:insert(pilihan_warna)
+
+			         	if(composer.data_max_warna > 0)then
+
+							local pilihan_warna = display.newText( "Warna", 0 + display.contentWidth * 0.05 , composer.tinggi_desc + display.contentHeight/20 , used_font, 11  * (display.contentWidth / 320))
+							pilihan_warna.anchorX = 0
+							pilihan_warna:setFillColor( 0 )
+							scrollView:insert(pilihan_warna)
 
 
 
-					
+							
 
-					local background_warna = display.newRoundedRect( pilihan_warna.x, pilihan_warna.y + pilihan_warna.height/2 + 10, display.contentWidth*0.9, display.contentHeight/15, 5)
-					background_warna.anchorY = 0
-					background_warna.anchorX = 0
-					background_warna:setFillColor( 133/255,190/255,72/255)
-					scrollView:insert(background_warna)
-
-
-
-					pilihan_warna2 = display.newText( " - Apa Saja - ", background_warna.x + 10 , background_warna.y + background_warna.height/2 , used_font, 11  * (display.contentWidth / 320))
-					pilihan_warna2.anchorX = 0
-					pilihan_warna2:setFillColor( 1 )
-					scrollView:insert(pilihan_warna2)
+							local background_warna = display.newRoundedRect( pilihan_warna.x, pilihan_warna.y + pilihan_warna.height/2 + 10, display.contentWidth*0.9, display.contentHeight/15, 5)
+							background_warna.anchorY = 0
+							background_warna.anchorX = 0
+							background_warna:setFillColor( 133/255,190/255,72/255)
+							scrollView:insert(background_warna)
 
 
 
-					scrollViewWarna = widget.newScrollView(
-					    {
-					        top = background_hitam.y + display.contentHeight/20,
-					        left = 0 + display.contentWidth * 0.05,
-					        width = display.contentWidth - display.contentWidth * 0.1,
-					        height = background_hitam.height - 2 * (display.contentHeight/20),
-					        horizontalScrollDisabled = true,
-					        verticalScrollDisabled = false,
-					        hideBackground = true,
-					        isBounceEnabled = false,
-					        --scrollWidth = 600,
-					        --scrollHeight = 2000,
-					        listener = scrollListener
-
-					    }
-					)
-
-					back_rounded = display.newRoundedRect(0 + display.contentWidth * 0.05,background_hitam.y + display.contentHeight/20, display.contentWidth*0.9, scrollViewWarna.height + 20, 5)
-					back_rounded:setFillColor(0.9)
-					back_rounded.anchorX = 0
-					back_rounded.anchorY = 0
-					back_rounded.alpha = 0
-
-					sceneGroup:insert(back_rounded)
-					sceneGroup:insert(scrollViewWarna)
-					scrollViewWarna.alpha = 0
-
-					local function onPilihanWarna()
-						status_back = 1
-						if(composer.data_max_warna > 0)then
-						scrollViewWarna.alpha = 1
-						back_rounded.alpha = 1
-						background_hitam.alpha = 0.5
-						scrollView:setIsLocked( true )
-						end
-					end
-					background_warna:addEventListener("tap", onPilihanWarna)
-
-
-
-					local index_warna
-          			local posisi_warna = 20
-
-          			if(composer.data_max_warna == nil)then
-          				composer.data_max_warna = 0
-          			end
-
-          			if(composer.data_max_warna > 0)then
-					for index_warna = 1, composer.data_max_warna do
-                  		local data2 = listDataWarna[index_warna]
-                  		--print(data2.varian)
-
-                  		local teks1 = display.newText( data2.varian,30 , posisi_warna, used_font, 12  * (display.contentWidth / 320))
-						teks1.anchorX = 0
-						teks1.anchorY = 0.5
-						teks1:setFillColor( 0 )
-						scrollViewWarna:insert(teks1)
-
-						local line = display.newLine( 10, teks1.y + teks1.height, scrollViewWarna.width-10, teks1.y + teks1.height )
-						line:setStrokeColor( 133/255,190/255,72/255)
-						line.strokeWidth = 1
-						scrollViewWarna:insert(line)
-
-
-						local function onTeks1()
-
-							background_hitam.alpha = 0
-							pilihan_warna2:removeSelf()
-							pilihan_warna2 = nil
-							composer.warna = data2.varian
-							warna_user = 99
-							pilihan_warna2 = display.newText( data2.varian, background_warna.x + 10 , background_warna.y + background_warna.height/2 , used_font, 11  * (display.contentWidth / 320))
+							pilihan_warna2 = display.newText( " - Apa Saja - ", background_warna.x + 10 , background_warna.y + background_warna.height/2 , used_font, 11  * (display.contentWidth / 320))
 							pilihan_warna2.anchorX = 0
 							pilihan_warna2:setFillColor( 1 )
 							scrollView:insert(pilihan_warna2)
 
+
+
+							scrollViewWarna = widget.newScrollView(
+							    {
+							        top = background_hitam.y + display.contentHeight/20,
+							        left = 0 + display.contentWidth * 0.05,
+							        width = display.contentWidth - display.contentWidth * 0.1,
+							        height = background_hitam.height - 2 * (display.contentHeight/20),
+							        horizontalScrollDisabled = true,
+							        verticalScrollDisabled = false,
+							        hideBackground = true,
+							        isBounceEnabled = false,
+							        --scrollWidth = 600,
+							        --scrollHeight = 2000,
+							        listener = scrollListener
+
+							    }
+							)
+
+							back_rounded = display.newRoundedRect(0 + display.contentWidth * 0.05,background_hitam.y + display.contentHeight/20, display.contentWidth*0.9, scrollViewWarna.height + 20, 5)
+							back_rounded:setFillColor(0.9)
+							back_rounded.anchorX = 0
+							back_rounded.anchorY = 0
+							back_rounded.alpha = 0
+
+							sceneGroup:insert(back_rounded)
+							sceneGroup:insert(scrollViewWarna)
 							scrollViewWarna.alpha = 0
+
+							local function onPilihanWarna()
+								status_back = 1
+								if(composer.data_max_warna > 0)then
+								scrollViewWarna.alpha = 1
+								back_rounded.alpha = 1
+								background_hitam.alpha = 0.5
+								scrollView:setIsLocked( true )
+								end
+							end
+							background_warna:addEventListener("tap", onPilihanWarna)
+
+
+
+							local index_warna
+		          			local posisi_warna = 20
+
+		          			if(composer.data_max_warna == nil)then
+		          				composer.data_max_warna = 0
+		          			end
+
+		          			if(composer.data_max_warna > 0)then
+							for index_warna = 1, composer.data_max_warna do
+		                  		local data2 = listDataWarna[index_warna]
+		                  		--print(data2.varian)
+
+		                  		local teks1 = display.newText( data2.varian,30 , posisi_warna, used_font, 12  * (display.contentWidth / 320))
+								teks1.anchorX = 0
+								teks1.anchorY = 0.5
+								teks1:setFillColor( 0 )
+								scrollViewWarna:insert(teks1)
+
+								local line = display.newLine( 10, teks1.y + teks1.height, scrollViewWarna.width-10, teks1.y + teks1.height )
+								line:setStrokeColor( 133/255,190/255,72/255)
+								line.strokeWidth = 1
+								scrollViewWarna:insert(line)
+
+
+								local function onTeks1()
+
+									background_hitam.alpha = 0
+									pilihan_warna2:removeSelf()
+									pilihan_warna2 = nil
+									composer.warna = data2.varian
+									warna_user = 99
+									pilihan_warna2 = display.newText( data2.varian, background_warna.x + 10 , background_warna.y + background_warna.height/2 , used_font, 11  * (display.contentWidth / 320))
+									pilihan_warna2.anchorX = 0
+									pilihan_warna2:setFillColor( 1 )
+									scrollView:insert(pilihan_warna2)
+
+									scrollViewWarna.alpha = 0
+									back_rounded.alpha = 0
+									scrollView:setIsLocked( false )
+								end
+								teks1:addEventListener("tap", onTeks1)
+
+
+								posisi_warna = posisi_warna + teks1.height + display.contentWidth/20
+		                  	end
+
+		                  	else
+		                  		composer.warna = ""
+		                  		local teks1 = display.newText( " - Apa Saja - ", posisi_warna , scrollViewWarna.height/2, used_font, 15  * (display.contentWidth / 320))
+								teks1.anchorX = 0
+								teks1.anchorY = 0.5
+								teks1:setFillColor( 1 )
+								scrollViewWarna:insert(teks1)
+		                  	end
+
+		                  	
+		                  	composer.tinggi_desc = background_warna.y + background_warna.height
+		                end
+
+
+		            if(data_max_ukuran > 0)then
+						local pilihan_size = display.newText( " Ukuran ", 0 + display.contentWidth * 0.05 , composer.tinggi_desc + display.contentHeight/20, used_font, 11  * (display.contentWidth / 320))
+						pilihan_size.anchorX = 0
+						pilihan_size:setFillColor( 0 )
+						scrollView:insert(pilihan_size)
+
+						local background_ukuran = display.newRoundedRect( pilihan_size.x, pilihan_size.y + pilihan_size.height/2 + 10, display.contentWidth*0.9, display.contentHeight/15, 5)
+						background_ukuran.anchorY = 0
+						background_ukuran.anchorX = 0
+						background_ukuran:setFillColor( 133/255,190/255,72/255)
+						scrollView:insert(background_ukuran)
+
+						pilihan_size2 = display.newText( " - Apa Saja -", background_ukuran.x + 10 , background_ukuran.y + background_ukuran.height/2 , used_font, 11  * (display.contentWidth / 320))
+						pilihan_size2.anchorX = 0
+						pilihan_size2:setFillColor( 1 )
+						scrollView:insert(pilihan_size2)
+
+
+						
+
+						scrollViewUkuran = widget.newScrollView(
+						    {
+						        top = background_hitam.y + display.contentHeight/20,
+						        left = 0 + display.contentWidth * 0.05,
+						        width = display.contentWidth - display.contentWidth * 0.1,
+						        height = background_hitam.height - 2 * (display.contentHeight/20),
+						        horizontalScrollDisabled = true,
+						        verticalScrollDisabled = false,
+						       -- backgroundColor = {0.99},
+						        isBounceEnabled = false,
+						        hideBackground = true,
+						        --scrollWidth = 600,
+						        --scrollHeight = 2000,
+						        listener = scrollListener
+
+						    }
+						)
+
+						local back_rounded = display.newRoundedRect(0 + display.contentWidth * 0.05,background_hitam.y + display.contentHeight/20, display.contentWidth*0.9, scrollViewUkuran.height + 20, 5)
+							back_rounded:setFillColor(0.9)
+							back_rounded.anchorX = 0
+							back_rounded.anchorY = 0
 							back_rounded.alpha = 0
-							scrollView:setIsLocked( false )
-						end
-						teks1:addEventListener("tap", onTeks1)
-
-
-						posisi_warna = posisi_warna + teks1.height + display.contentWidth/20
-                  	end
-
-                  	else
-                  		composer.warna = ""
-                  		local teks1 = display.newText( " - Apa Saja - ", posisi_warna , scrollViewWarna.height/2, used_font, 15  * (display.contentWidth / 320))
-						teks1.anchorX = 0
-						teks1.anchorY = 0.5
-						teks1:setFillColor( 1 )
-						scrollViewWarna:insert(teks1)
-                  	end
-
-					local pilihan_size = display.newText( " Ukuran ", 0 + display.contentWidth * 0.05 , background_warna.y + background_warna.height + 20, used_font, 11  * (display.contentWidth / 320))
-					pilihan_size.anchorX = 0
-					pilihan_size:setFillColor( 0 )
-					scrollView:insert(pilihan_size)
-
-					local background_ukuran = display.newRoundedRect( pilihan_size.x, pilihan_size.y + pilihan_size.height/2 + 10, display.contentWidth*0.9, display.contentHeight/15, 5)
-					background_ukuran.anchorY = 0
-					background_ukuran.anchorX = 0
-					background_ukuran:setFillColor( 133/255,190/255,72/255)
-					scrollView:insert(background_ukuran)
-
-					pilihan_size2 = display.newText( " - Apa Saja -", background_ukuran.x + 10 , background_ukuran.y + background_ukuran.height/2 , used_font, 11  * (display.contentWidth / 320))
-					pilihan_size2.anchorX = 0
-					pilihan_size2:setFillColor( 1 )
-					scrollView:insert(pilihan_size2)
-
-
-					
-
-					scrollViewUkuran = widget.newScrollView(
-					    {
-					        top = background_hitam.y + display.contentHeight/20,
-					        left = 0 + display.contentWidth * 0.05,
-					        width = display.contentWidth - display.contentWidth * 0.1,
-					        height = background_hitam.height - 2 * (display.contentHeight/20),
-					        horizontalScrollDisabled = true,
-					        verticalScrollDisabled = false,
-					       -- backgroundColor = {0.99},
-					        isBounceEnabled = false,
-					        hideBackground = true,
-					        --scrollWidth = 600,
-					        --scrollHeight = 2000,
-					        listener = scrollListener
-
-					    }
-					)
-					sceneGroup:insert(scrollViewUkuran)
-					scrollViewUkuran.alpha = 0
-
-
-					local function onPilihanUkuran()
-						if(composer.data_max_ukuran > 0)then
-						status_back = 1
-						back_rounded.alpha = 1
-						scrollViewUkuran.alpha = 1
-						background_hitam.alpha = 0.5
-						scrollView:setIsLocked( true )
-						end
-					end
-					background_ukuran:addEventListener("tap", onPilihanUkuran)
-
-					local index_warna
-          			local index_ukuran
-          			local posisi_ukuran = 20
-
-          			if(composer.data_max_ukuran > 0)then
-					for index_ukuran = 1, composer.data_max_ukuran do
-                  		local data2 = listDataUkuran[index_ukuran]
-                  		--print(data2.varian)
-
-                  		local teks1 = display.newText( data2.varian, 30 , posisi_ukuran, used_font, 15  * (display.contentWidth / 320))
-						teks1.anchorX = 0
-						teks1.anchorY = 0.5
-						teks1:setFillColor( 0 )
-						scrollViewUkuran:insert(teks1)
-
-						local line = display.newLine( 10, teks1.y + teks1.height, scrollViewWarna.width-10, teks1.y + teks1.height )
-						line:setStrokeColor( 133/255,190/255,72/255)
-						line.strokeWidth = 1
-						scrollViewWarna:insert(line)
-
-
-						local function onTeks1()
-
 							
-							pilihan_size2:removeSelf()
-							pilihan_size2 = nil
-							background_hitam.alpha = 0
-							composer.ukuran = data2.varian
-							ukuran_user = 99
-							pilihan_size2 = display.newText( data2.varian, background_warna.x + 10 , background_ukuran.y + background_ukuran.height/2 , used_font, 11  * (display.contentWidth / 320))
-							pilihan_size2.anchorX = 0
-							pilihan_size2:setFillColor( 1 )
-							scrollView:insert(pilihan_size2)
+						sceneGroup:insert(back_rounded)
+						sceneGroup:insert(scrollViewUkuran)
+						scrollViewUkuran.alpha = 0
 
-							scrollViewUkuran.alpha = 0
-							back_rounded.alpha = 0
-							scrollView:setIsLocked( false )
+
+						
+
+
+						local function onPilihanUkuran()
+							if(composer.data_max_ukuran > 0)then
+							status_back = 1
+							back_rounded.alpha = 1
+							scrollViewUkuran.alpha = 1
+							background_hitam.alpha = 0.5
+							scrollView:setIsLocked( true )
+							end
 						end
-						teks1:addEventListener("tap", onTeks1)
+						background_ukuran:addEventListener("tap", onPilihanUkuran)
 
-						posisi_ukuran = posisi_ukuran + teks1.height + display.contentWidth/20
-                  	end
+						local index_warna
+	          			local index_ukuran
+	          			local posisi_ukuran = 20
 
-                  	else
-                  		composer.ukuran = ""
-                  		local teks1 = display.newText( " - Apa Saja - ", posisi_ukuran , scrollViewUkuran.height/2, used_font, 15  * (display.contentWidth / 320))
-						teks1.anchorX = 0
-						teks1.anchorY = 0.5
-						teks1:setFillColor( 1  )
-						scrollViewUkuran:insert(teks1)
-                  	end
+	          			if(composer.data_max_ukuran > 0)then
+						for index_ukuran = 1, composer.data_max_ukuran do
+	                  		local data2 = listDataUkuran[index_ukuran]
+	                  		--print(data2.varian)
 
-
-                  	local pilihan_total = display.newText( " Jumlah ", 0 + display.contentWidth * 0.05 , background_ukuran.y + background_ukuran.height + 20, used_font, 11  * (display.contentWidth / 320))
-					pilihan_total.anchorX = 0
-					pilihan_total:setFillColor( 0 )
-					scrollView:insert(pilihan_total)
-
-					local background_total = display.newRoundedRect( pilihan_total.x, pilihan_total.y + pilihan_total.height/2 + 10, display.contentWidth*0.9, display.contentHeight/15, 5)
-					background_total.anchorY = 0
-					background_total.anchorX = 0
-					background_total:setFillColor( 0.9)
-					scrollView:insert(background_total)
-
-					local label_total = display.newText( "1", background_total.x + 10 , background_total.y + background_total.height/2, used_font, 13  * (display.contentWidth / 320))
-					label_total.anchorY = 0.5
-					label_total.anchorX = 0
-					label_total:setFillColor( 0 )
-					scrollView:insert(label_total)
+	                  		local teks1 = display.newText( data2.varian, 30 , posisi_ukuran, used_font, 15  * (display.contentWidth / 320))
+							teks1.anchorX = 0
+							teks1.anchorY = 0.5
+							teks1:setFillColor( 0 )
+							scrollViewUkuran:insert(teks1)
+							teks1:toFront()
+							--[[local line = display.newLine( 10, teks1.y + teks1.height, scrollViewUkuran.width-10, teks1.y + teks1.height )
+							line:setStrokeColor( 133/255,190/255,72/255)
+							line.strokeWidth = 1
+							scrollViewWarna:insert(line)--]]
 
 
-					local function create_teksfield_total()
+							local function onTeks1()
 
-					teksfield_total = native.newTextField(display.contentCenterX, label_total.y, display.contentWidth*0.85, display.contentHeight/15)
-					teksfield_total.anchorX = 0.5
-					teksfield_total.anchorY = 0.5
-					teksfield_total.inputType = "number"
-					teksfield_total.font = native.newFont( used_font, 12  * (display.contentWidth / 320) )
-					teksfield_total.hasBackground = false
-					teksfield_total.size = 12  * (display.contentWidth / 320)
-					teksfield_total:resizeHeightToFitFont()
-					scrollView:insert( teksfield_total )
+								
+								pilihan_size2:removeSelf()
+								pilihan_size2 = nil
+								background_hitam.alpha = 0
+								composer.ukuran = data2.varian
+								ukuran_user = 99
+								pilihan_size2 = display.newText( data2.varian, background_ukuran.x + 10 , background_ukuran.y + background_ukuran.height/2 , used_font, 11  * (display.contentWidth / 320))
+								pilihan_size2.anchorX = 0
+								pilihan_size2:setFillColor( 1 )
+								scrollView:insert(pilihan_size2)
 
+								scrollViewUkuran.alpha = 0
+								back_rounded.alpha = 0
+								scrollView:setIsLocked( false )
+							end
+							teks1:addEventListener("tap", onTeks1)
 
-					local function fieldHandler_total(event) 
-				               if ("began" == event.phase) then 
+							posisi_ukuran = posisi_ukuran + teks1.height + display.contentWidth/20
+	                  	end
 
-				               	  label_total.text = ""
+	                  	else
+	                  		composer.ukuran = ""
+	                  		local teks1 = display.newText( " - Apa Saja - ", posisi_ukuran , scrollViewUkuran.height/2, used_font, 15  * (display.contentWidth / 320))
+							teks1.anchorX = 0
+							teks1.anchorY = 0.5
+							teks1:setFillColor( 1  )
+							scrollViewUkuran:insert(teks1)
+	                  	end
 
-				                  if name ~= nil then
-				                    --name:removeSelf()
-				                    --name = nil
-
-				                  end
-				               elseif ("ended" == event.phase) then 
-				                  composer.qty = teksfield_total.text
-				                  label_total.text = teksfield_total.text
-				                  if(teksfield_total.text == nil or teksfield_total.text == "")then
-				                  	label_total.text = "1"
-				                  end
-				                  if(teksfield_total ~= nil)then
-				                  teksfield_total:removeSelf()
-				                  teksfield_total = nil
-				              	  end
-
-				               elseif ("submitted" == event.phase) then  
-				                  composer.qty = teksfield_total.text
-				                  label_total.text = teksfield_total.text
-
-				                  if(teksfield_total.text == nil or teksfield_total.text == "")then
-				                  	label_total.text = "1"
-				                  end
-				                  native.setKeyboardFocus(nil) 
-				              	  				                elseif ( event.phase == "editing" ) then
-				                  
-				                 composer.qty = teksfield_total.text
-
-				                end  
-				         end 
-
-				    teksfield_total:addEventListener( "userInput", fieldHandler_total ) 
+	                  	composer.tinggi_desc = background_ukuran.y + background_ukuran.height + 20
+	                end
 
 
+	                if(tonumber(composer.stock) > 0)then
+
+	                  	local pilihan_total = display.newText( " Jumlah ", 0 + display.contentWidth * 0.05 , composer.tinggi_desc + 20, used_font, 11  * (display.contentWidth / 320))
+						pilihan_total.anchorX = 0
+						pilihan_total:setFillColor( 0 )
+						scrollView:insert(pilihan_total)
+
+						local background_total = display.newRoundedRect( pilihan_total.x, pilihan_total.y + pilihan_total.height/2 + 10, display.contentWidth*0.9, display.contentHeight/15, 5)
+						background_total.anchorY = 0
+						background_total.anchorX = 0
+						background_total:setFillColor( 0.9)
+						scrollView:insert(background_total)
+
+						local label_total = display.newText( "1", background_total.x + 10 , background_total.y + background_total.height/2, used_font, 13  * (display.contentWidth / 320))
+						label_total.anchorY = 0.5
+						label_total.anchorX = 0
+						label_total:setFillColor( 0 )
+						scrollView:insert(label_total)
+
+
+						local function create_teksfield_total()
+
+						teksfield_total = native.newTextField(display.contentCenterX, label_total.y, display.contentWidth*0.85, display.contentHeight/15)
+						teksfield_total.anchorX = 0.5
+						teksfield_total.anchorY = 0.5
+						teksfield_total.inputType = "number"
+						teksfield_total.font = native.newFont( used_font, 12  * (display.contentWidth / 320) )
+						teksfield_total.hasBackground = false
+						teksfield_total.size = 12  * (display.contentWidth / 320)
+						teksfield_total:resizeHeightToFitFont()
+						scrollView:insert( teksfield_total )
+
+
+						local function fieldHandler_total(event) 
+					               if ("began" == event.phase) then 
+
+					               	  label_total.text = ""
+
+					                  if name ~= nil then
+					                    --name:removeSelf()
+					                    --name = nil
+
+					                  end
+					               elseif ("ended" == event.phase) then 
+					                  composer.qty = teksfield_total.text
+					                  label_total.text = teksfield_total.text
+					                  if(teksfield_total.text == nil or teksfield_total.text == "")then
+					                  	label_total.text = "1"
+					                  end
+					                  if(teksfield_total ~= nil)then
+					                  teksfield_total:removeSelf()
+					                  teksfield_total = nil
+					              	  end
+
+					               elseif ("submitted" == event.phase) then  
+					                  composer.qty = teksfield_total.text
+					                  label_total.text = teksfield_total.text
+
+					                  if(teksfield_total.text == nil or teksfield_total.text == "")then
+					                  	label_total.text = "1"
+					                  end
+					                  native.setKeyboardFocus(nil) 
+					              	  				                elseif ( event.phase == "editing" ) then
+					                  
+					                 composer.qty = teksfield_total.text
+
+					                end  
+					         end 
+
+					    teksfield_total:addEventListener( "userInput", fieldHandler_total ) 
+
+
+						end
+
+
+						composer.tinggi_desc = background_total.y + background_total.height + display.contentHeight/10
+						background_total:addEventListener("tap", create_teksfield_total)
 					end
 
-					background_total:addEventListener("tap", create_teksfield_total)
 
 
-					local background_beli = display.newRoundedRect( pilihan_total.x, background_total.y + background_total.height + display.contentHeight/10 , display.contentWidth*0.9, display.contentHeight/15, 5)
+					local background_beli = display.newRoundedRect( 0 + display.contentWidth * 0.05, composer.tinggi_desc, display.contentWidth*0.9, display.contentHeight/15, 5)
 					if(tonumber(composer.stock) == 0)then
 						background_beli:setFillColor( 1,0,0)
 					else
